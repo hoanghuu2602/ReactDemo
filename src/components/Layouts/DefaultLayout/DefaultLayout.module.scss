@@ -1,7 +1,12 @@
+
+
 .container{
     width: var(--container-width);
     min-height: 500px;
     background-color: antiquewhite;
     display: flex;
-justify-content: center;
+    margin: 0 auto;
+}
+.content{
+    flex: 1;
 }
