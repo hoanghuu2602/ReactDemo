@@ -10,7 +10,9 @@ function Button({ to, href,
     large = false,
     text = false,
     rounded=false,
-    disabled =false,
+    disabled = false,
+    leftIcon=false,
+    rightIcon=false,
     children, onClick, ...passprops }) {
     
     let Comp = 'button'
@@ -22,6 +24,8 @@ function Button({ to, href,
         text,
         rounded,
         disabled,
+        leftIcon,
+        rightIcon,
     })
     // false thif class. ko hien thi
     const props = {
@@ -46,8 +50,10 @@ function Button({ to, href,
     // End Remove event listener when btn is disabled
 
     return (
-            <Comp className={classnames} {...props}>
-                <span>{ children}</span>
+        <Comp className={classnames} {...props}>
+            {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
+                <span className={cx('title')}>{ children}</span>
+            {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}
            </Comp>
     );
 }

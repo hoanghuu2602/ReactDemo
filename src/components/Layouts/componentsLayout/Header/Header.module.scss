@@ -1,65 +1,81 @@
-.wrapper{
-    --search-border-radius: 92px;
-    --search-width: 400px;
-    width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    // background-color: aquamarine;    
-        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
+.wrapper {
+  --search-border-radius: 92px;
+  --search-width: 400px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  // background-color: aquamarine;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
 }
-.inner{
-    // width: 1200px;
-    margin:  0 auto;
-    width: var(--container-width);
+.inner {
+  // width: 1200px;
+  margin: 0 auto;
+  width: var(--container-width);
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; // Can item them trucj dung
+}
+.logo,
+.search {
+  flex: 1;
+}
+.actions {
+  height: 100%;
+  display: flex;
+  flex: 1;
+ align-items: center;
+}
+.logo {
+  width: 30%;
+  display: flex;
+  & img {
+    width: 100px;
+    height: 40px;
+    align-items: center;
+  }
+}
+.search {
+  width: var(--search-width);
+  height: 46px;
+  padding-left: 16px;
+  background-color: rgba(22, 24, 35, 0.06);
+  border-radius: var(--search-border-radius);
+  // border-bottom-left-radius: 92px;
+  display: flex;
+
+  input {
     height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; // Can item them trucj dung
-    
-}
-.logo, .search, .actions{
-flex: 1;
+    border: none;
+    font-size: 1.6rem;
+    outline: none;
+    color: var(--black);
+    background-color: transparent;
+    flex: 1;
+  }
+  .search-btn {
+    width: 52px;
+    height: 100%;
+    border-top-right-radius: var(--search-border-radius);
+    border-bottom-right-radius: var(--search-border-radius);
 
-}
-.logo{
-    width: 30%;
-    display: flex;
-    & img{
-        width: 100px;
-        height: 40px;
-        align-items: center;
+    &:hover {
+      background-color: rgba(22, 24, 35, 0.06);
     }
+  }
 }
-.search{
-    width: var(--search-width);
-    height: 46px;
-    padding-left:16px;
-        background-color: rgba(22, 24, 35, 0.06);
-        border-radius: var(--search-border-radius);
-        // border-bottom-left-radius: 92px;
-        display: flex;
-
-        input{
-            height: 100%;
-            border: none;
-            font-size: 1.6rem;
-            outline: none;
-        color: var(--black);
-            background-color: transparent;
-            flex: 1;
-        }
-        .search-btn{
-            width: 52px;
-            height: 100%;
-            border-top-right-radius: var(--search-border-radius);
-            border-bottom-right-radius: var(--search-border-radius);
-            
-            &:hover{
-                        background-color: rgba(22, 24, 35, .06);
-            }
-        }
+.search-result {
+  width: var(--search-width);
 }
-.search-result{
-    width: var(--search-width);
+.menu-item {
+  width: 250px;
+}
+.more-btn{
+    margin-left: 20px;
+    // height: 100%;
+    align-items: center;
+    background-color: aqua;
+    min-width: 50px;
+    padding:  9px 16px;
 }
