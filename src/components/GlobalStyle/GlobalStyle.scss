@@ -20,7 +20,7 @@ body{
     border: none;
  }
  a[href]{
-    color: var(--text-color);
+    // color: var(--text-color);
     text-decoration: none;
  }
 
@@ -36,6 +36,7 @@ body{
     // Color
 --primary: red;
 --black: #000;
+--while: #fff;
 --text-color:#333;
 
     // Width

@@ -1,5 +1,6 @@
 .wrapper{
     --search-border-radius: 92px;
+    --search-width: 400px;
     width: 100%;
     height: 60px;
     display: flex;
@@ -31,7 +32,7 @@ flex: 1;
     }
 }
 .search{
-    width: 30%;
+    width: var(--search-width);
     height: 46px;
     padding-left:16px;
         background-color: rgba(22, 24, 35, 0.06);
@@ -58,4 +59,7 @@ flex: 1;
                         background-color: rgba(22, 24, 35, .06);
             }
         }
+}
+.search-result{
+    width: var(--search-width);
 }

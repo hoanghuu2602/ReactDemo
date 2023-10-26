@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-
+import GlobalStyles from "./components/GlobalStyle";
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 import { publicRoutes } from './routes'
 import { DefaultLayout } from './components/Layouts'
-import GlobalStyles from "./components/GlobalStyle";
+
 import Button from "./components/Button";
 
 

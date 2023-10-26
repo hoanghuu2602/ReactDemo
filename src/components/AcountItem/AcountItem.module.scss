@@ -1,0 +1,30 @@
+.wrapper{
+    display: flex;
+    width: 100%;
+    margin-top: 15px;
+    
+}
+.user-img{
+width: 50px;
+border-radius: 50%;
+}
+.user-detail{
+flex: 1;
+display: flex;
+flex-direction: column;
+margin-left: 20px;
+}
+.user-name{
+line-height: 30px;
+
+span{
+    margin-right: 10px;
+}
+svg{
+    color: blue;
+    font-size: 1.6rem;
+}
+}
+.user-description{
+
+}
