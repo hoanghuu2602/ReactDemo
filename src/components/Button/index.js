@@ -11,12 +11,15 @@ function Button({ to, href,
     text = false,
     rounded=false,
     disabled = false,
-    leftIcon=false,
-    rightIcon=false,
-    children, onClick, ...passprops }) {
+    leftIcon,
+    rightIcon,
+    children,
+    className,
+    onClick, ...passprops }) {
     
     let Comp = 'button'
-    const classnames = cx('wrapper', {
+    const classes = cx('wrapper', {
+        [className]:className,
         primary,
         outline,
         small,
@@ -50,7 +53,7 @@ function Button({ to, href,
     // End Remove event listener when btn is disabled
 
     return (
-        <Comp className={classnames} {...props}>
+        <Comp className={classes} {...props}>
             {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
                 <span className={cx('title')}>{ children}</span>
             {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}

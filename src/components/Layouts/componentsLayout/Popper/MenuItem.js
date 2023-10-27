@@ -1,13 +1,19 @@
+import Button from '../../../Button';
 import styles from '../Popper/Menu/Menu.module.scss'
-import classNames from "classnames";
+import classNames from "classnames/bind";
 const cx = classNames.bind(styles)
-function MenuItem({children}) {
-    return (  
-        <div className={cx('menu-item')}>
-            <span>
-                {children.icon}
-            </span>
-            <div>{children.name}</div>
+
+
+function MenuItem({ data, onClick }) {
+    return (
+        <div>
+
+            <Button
+                text
+            className={cx('menu-item')}
+                leftIcon={data.icon}
+                onClick={onClick}
+        >{data.name}</Button>
         </div>
     );
 }

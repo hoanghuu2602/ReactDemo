@@ -3,18 +3,31 @@
     min-height: 100px;
     display: flex;
 }
-
+.menu-list{
+    width: 240px;
+}
 .menu-item{
     width: 100%;
-    display: flex;
-flex-direction:row;
+    justify-content: flex-start;
+//     display: flex;
+// flex-direction:column;
 
+}
 
-    span{
-        width: 30px;
-    }
-
-    h5{
-        color: red;
-    }
+.header{
+    position: relative;
+    height: 50px;
+    margin-top: -8px;
+}
+.back-btn{
+width: 50px;
+height: 100%;
+background-color: transparent;
+cursor: pointer;
+}
+.header-title{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
 }
