@@ -14,10 +14,18 @@ import AcountItem from '../../../AcountItem';
 import Button from '../../../Button';
 import Menu from '../Popper/Menu';
 import Image from '../../../Image';
+import { IconHome } from '../../../Icon';
+import { useEffect, useState } from 'react';
+import Search from '../Search';
 
 
 const cx = classNames.bind(styles)
 function Header() {
+
+
+
+
+
     const menuList = [
         {
             icon: <FontAwesomeIcon icon={faCameraRetro} />,
@@ -54,35 +62,10 @@ function Header() {
                     <img src={images.logo} alt="Logo" />
                 </div>
 
-                <Tippy
+                {/* Search */}
 
-                    // visible
-                    interactive
-                    render={attrs => (
-
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <AcountItem />
-                                <AcountItem />
-                                <AcountItem />
-
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="Search accounts and videos" spellCheck='false' />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                            {/* <FontAwesomeIcon icon="fa-solid fa-circle-xmark" /> */}
-                        </button>
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon className={cx('load')} icon={faSpinner} />
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-
-                    </div>
-                </Tippy>
+                <Search />
+                
                 <div className={cx('actions')}>
                     {curentUser ? (
                         <div className={cx('curent-user')}>
@@ -98,7 +81,8 @@ function Header() {
 
                             <Button
                                 text
-                            >Upload</Button>
+                                >
+                                   Upload</Button>
 
 
                             <Button
