@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 import { publicRoutes } from './routes'
 import { DefaultLayout } from './components/Layouts'
+import Nav from './components/Navigation/Nav'
 
 import Button from "./components/Button";
 
@@ -26,8 +27,7 @@ function App() {
 
      <GlobalStyles>
         <div className='App-container'>
-          {/* <Nav /> */}
-
+          <Nav />
 
 
           <Switch>
@@ -61,7 +61,7 @@ function App() {
         </div>
   
         <ToastContainer
-          position="top-right"
+          position="top-center"
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}
