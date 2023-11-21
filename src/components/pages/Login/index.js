@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { toast } from "react-toastify";
 import { loginUser } from "../../../services/userService"
 
 function Login(props) {
+    const history = useHistory();
+
+    useEffect(() => {
+        let session = sessionStorage.getItem('account');
+        if (session) {
+           history.push('/home')
+        }
+    }, [])
+
+
     const [valueLogin, setValueLogin] = useState("")
 const [password,setPassword] = useState("")
-    const history = useHistory();
 
     const defaultObjValidInput = {
         isValidValueLogin: true,
@@ -25,7 +34,15 @@ const [password,setPassword] = useState("")
             toast.error('Bạn chưa nhập mật khẩu')
             return;
         }
-        await loginUser(valueLogin,password)
+        let response = await loginUser(valueLogin, password);
+        if (response && response.data && +response.data.EC === 0) {
+            let data = {
+                isAuthenticated: true,
+                token:"fake token"
+            }
+            sessionStorage.setItem("account", JSON.stringify(data));
+            history.push('/users')
+        }
         
     }
 

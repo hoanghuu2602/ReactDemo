@@ -1,6 +1,6 @@
 function Home() {
     return (
-        <h1>Trang Home</h1>
+        <h1>Trang Home xin chao</h1>
     );
 }
 

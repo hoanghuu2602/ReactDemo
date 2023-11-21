@@ -20,7 +20,7 @@ const Login = (props) => {
         <div className="container">
             <div className="row justify-content-center mt-5">
                 <div className="col-5">
-                    One of two columns
+                    One of two columns fghjm ik uy
                 </div>
                 <div className="col-5">
                     <div className="wraper-form">

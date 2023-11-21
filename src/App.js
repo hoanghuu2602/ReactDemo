@@ -9,7 +9,7 @@ import {
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import _ from "lodash"
 
 import './App.scss';
 import { publicRoutes } from './routes'
@@ -17,17 +17,34 @@ import { DefaultLayout } from './components/Layouts'
 import Nav from './components/Navigation/Nav'
 
 import Button from "./components/Button";
+import { useState } from "react";
+import { useEffect } from "react";
 
 
 
 
 function App() {
+  const [account, setAccount] = useState({});
+
+  useEffect(() => {
+    let session = sessionStorage.getItem('account');
+    if (session) {
+      setAccount(JSON.parse(session));
+}
+  },[])
+
+
+
+
   return (
     <Router>
 
      <GlobalStyles>
         <div className='App-container'>
-          <Nav />
+          {account && !_.isEmpty(account) && account.isAuthenticated
+            && <Nav />
+          }
+         
 
 
           <Switch>
