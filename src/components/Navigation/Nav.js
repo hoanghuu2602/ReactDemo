@@ -8,6 +8,7 @@ function Nav(props) {
             <NavLink to="/following">Following</NavLink>
             <NavLink to="/profile">Profile</NavLink>
             <NavLink to="/login">Login</NavLink>
+            <NavLink to="/user">User</NavLink>
             <NavLink to="/register">Register</NavLink>
             <NavLink to="/contact">Contact</NavLink>
             <NavLink to="/about">About</NavLink>
