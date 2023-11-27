@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ReactPaginate from 'react-paginate';
-
-import { fetchListUser } from "../../../services/userService";
+import { toast } from "react-toastify";
+import { fetchListUser, fetchDeleteUser } from "../../../services/userService";
 
 function User() {
     const [listUser, setListUser] = useState([])
@@ -10,7 +10,7 @@ function User() {
     const [totalPages,setTotalPages]=useState(0)
 
     useEffect(() => {
-        fetchUser()
+        fetchUser();
 
     }, [currentPage]);
     const fetchUser = async () => {
@@ -22,6 +22,10 @@ function User() {
         }
 
     }
+
+    
+
+
     const handlePageClick = async (event) => {
         // alert(event.selected)
         setCurrentPage(+event.selected + 1)
@@ -31,6 +35,18 @@ function User() {
         // );
         // setItemOffset(newOffset);
     };
+
+    const handleDeleteUser =async (user) => {
+        // console.log('usafh>>>',user)
+        let reponse = await fetchDeleteUser(user)
+        console.log('Delete >>>', reponse)
+        // alert(user.id)
+        if (reponse && reponse.data.EC === 0) {
+            toast.success(reponse.data.EM)   
+        } else {
+            toast.error(reponse.data.EM)
+        }
+    }
     return (
         <>
             <h1>Trang User xin chao</h1>
@@ -47,6 +63,7 @@ function User() {
                             <th scope="col">Email</th>
                             <th scope="col">Phone</th>
                             <th scope="col">Group</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,6 +76,14 @@ function User() {
                                         <th scope="row">{item.email}</th>
                                         <th scope="row">{item.phone}</th>
                                         <th scope="row">{item.Group ? item.Group.name : ''}</th>
+                                        <th scope="row">
+                                            <button
+                                                
+                                                className="btn btn-warning">Edit</button>
+                                            <button
+                                                onClick={() => handleDeleteUser(item)}
+                                                className="btn btn-danger ms-2">Delete</button>
+                                        </th>
                                     </tr>
                                 ))}
 
@@ -78,12 +103,12 @@ function User() {
             <div className="footer-user">
                 {totalPages > 0 &&
                     <ReactPaginate
-                        nextLabel="next >"
+                        nextLabel="Next >"
                         onPageChange={handlePageClick}
                         pageRangeDisplayed={3}
                         marginPagesDisplayed={2}
                         pageCount={totalPages}
-                        previousLabel="< previous"
+                        previousLabel="< Previous"
                         pageClassName="page-item"
                         pageLinkClassName="page-link"
                         previousClassName="page-item"
