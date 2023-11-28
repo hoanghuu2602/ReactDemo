@@ -5,10 +5,12 @@ import Search from '../components/pages/Search'
 import Profile from '../components/pages/Profile'
 import Login from '../components/pages/Login'
 import User from '../components/pages/User'
+import Register from '../components/Register/Register'
 import  HeaderOnly from '../components/Layouts/HeaderOnly'
 // Public Router
 const publicRoutes = [
     { path: '/following', component: Following},
+    { path: '/register', component: Register},
     { path: '/user', component: User},
     { path: '/login', component: Login},
     { path: '/profile', component: Profile},

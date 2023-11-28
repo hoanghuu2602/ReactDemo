@@ -6,6 +6,7 @@ function Nav(props) {
         <div className="topnav">
             <NavLink  to="/">Home</NavLink>
             <NavLink to="/following">Following</NavLink>
+            <NavLink to="/register">Register</NavLink>
             <NavLink to="/profile">Profile</NavLink>
             <NavLink to="/login">Login</NavLink>
             <NavLink to="/user">User</NavLink>

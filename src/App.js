@@ -90,7 +90,6 @@ function App() {
           theme="light"
         />
         {/* Same as */}
-        <ToastContainer />
      </GlobalStyles>
     </Router>
   );

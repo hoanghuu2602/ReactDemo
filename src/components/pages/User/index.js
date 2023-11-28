@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
 import ReactPaginate from 'react-paginate';
 import { toast } from "react-toastify";
+
 import { fetchListUser, fetchDeleteUser } from "../../../services/userService";
+import ModalDelete from '../../Modal/ModalDelete'
+import ModalAddUser from "../../Modal/ModalAddUser";
+
 
 function User() {
     const [listUser, setListUser] = useState([])
     const [currentPage,setCurrentPage]=useState(1)
     const [currentLimit,setCurrentLimit]=useState(2)
-    const [totalPages,setTotalPages]=useState(0)
+    const [totalPages, setTotalPages] = useState(0)
+    const [isShowDelete,setIsShowDelete]=useState(false)
+    const [dataModal,setDataModal]=useState([])
 
     useEffect(() => {
         fetchUser();
@@ -38,17 +44,47 @@ function User() {
 
     const handleDeleteUser =async (user) => {
         // console.log('usafh>>>',user)
-        let reponse = await fetchDeleteUser(user)
+        setDataModal(user)
+        setIsShowDelete(true)        
+    }
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setIsShowDelete(false);
+
+    const handleShow = () => setShow(true);
+
+    const handleAction = async () => {
+        let reponse = await fetchDeleteUser(dataModal)
         console.log('Delete >>>', reponse)
         // alert(user.id)
         if (reponse && reponse.data.EC === 0) {
-            toast.success(reponse.data.EM)   
+            toast.success(reponse.data.EM)
+            setIsShowDelete(false)
+            setDataModal([])
+            await fetchUser() 
         } else {
             toast.error(reponse.data.EM)
         }
     }
     return (
         <>
+        
+
+            <ModalDelete
+                show={isShowDelete}
+                handleClose={handleClose}
+                messege="Ban cos thuc su muon xoa noi dung nay khong"
+                handleAction={handleAction}
+            />
+            
+            <ModalAddUser
+
+            />
+
+
+
+
+
             <h1>Trang User xin chao</h1>
             <div className="header-user">
                 <button className="btn btn-primary">Refesh</button>
@@ -81,6 +117,7 @@ function User() {
                                                 
                                                 className="btn btn-warning">Edit</button>
                                             <button
+                                                // onClick={handleShow}
                                                 onClick={() => handleDeleteUser(item)}
                                                 className="btn btn-danger ms-2">Delete</button>
                                         </th>
