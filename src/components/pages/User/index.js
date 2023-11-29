@@ -5,22 +5,24 @@ import { toast } from "react-toastify";
 import { fetchListUser, fetchDeleteUser } from "../../../services/userService";
 import ModalDelete from '../../Modal/ModalDelete'
 import ModalAddUser from "../../Modal/ModalAddUser";
+import { sassTrue } from "sass";
 
 
 function User() {
     const [listUser, setListUser] = useState([])
-    const [currentPage,setCurrentPage]=useState(1)
-    const [currentLimit,setCurrentLimit]=useState(2)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [currentLimit, setCurrentLimit] = useState(2)
     const [totalPages, setTotalPages] = useState(0)
-    const [isShowDelete,setIsShowDelete]=useState(false)
-    const [dataModal,setDataModal]=useState([])
+    const [isShowDelete, setIsShowDelete] = useState(false)
+    const [dataModal, setDataModal] = useState([])
+    const [showModalAddUser, setShowModalAddUser] = useState(false);
 
     useEffect(() => {
         fetchUser();
 
     }, [currentPage]);
     const fetchUser = async () => {
-        let reponsite = await fetchListUser(currentPage,currentLimit)
+        let reponsite = await fetchListUser(currentPage, currentLimit)
         if (reponsite && reponsite.data.EC === 0) {
             // console.log('data>>>', reponsite.data )
             setTotalPages(reponsite.data.DT.totalPages)
@@ -29,7 +31,7 @@ function User() {
 
     }
 
-    
+
 
 
     const handlePageClick = async (event) => {
@@ -42,16 +44,19 @@ function User() {
         // setItemOffset(newOffset);
     };
 
-    const handleDeleteUser =async (user) => {
+    const handleDeleteUser = async (user) => {
         // console.log('usafh>>>',user)
         setDataModal(user)
-        setIsShowDelete(true)        
+        setIsShowDelete(true)
     }
-    const [show, setShow] = useState(false);
+    // const [show, setShow] = useState(false);
+  
+
 
     const handleClose = () => setIsShowDelete(false);
+    const handleCloseAddUser = () => setShowModalAddUser(false);
 
-    const handleShow = () => setShow(true);
+    // const handleShow = () => setShow(true);
 
     const handleAction = async () => {
         let reponse = await fetchDeleteUser(dataModal)
@@ -61,14 +66,14 @@ function User() {
             toast.success(reponse.data.EM)
             setIsShowDelete(false)
             setDataModal([])
-            await fetchUser() 
+            await fetchUser()
         } else {
             toast.error(reponse.data.EM)
         }
     }
     return (
         <>
-        
+
 
             <ModalDelete
                 show={isShowDelete}
@@ -76,9 +81,10 @@ function User() {
                 messege="Ban cos thuc su muon xoa noi dung nay khong"
                 handleAction={handleAction}
             />
-            
-            <ModalAddUser
 
+            <ModalAddUser
+                show={showModalAddUser}
+                handleClose={handleCloseAddUser}
             />
 
 
@@ -88,7 +94,9 @@ function User() {
             <h1>Trang User xin chao</h1>
             <div className="header-user">
                 <button className="btn btn-primary">Refesh</button>
-                <button className="btn btn-success ms-3">Add New User</button>
+                <button className="btn btn-success ms-3"
+                    onClick={() => setShowModalAddUser(true) }
+                >Add New User</button>
             </div>
             <div className="content-user">
                 <table className="table table-hover table-bordered">
@@ -107,14 +115,14 @@ function User() {
                             <>
                                 {listUser.map((item, index) => (
                                     <tr key={`row-${index}`}>
-                                        <th scope="row">{index + 1}</th>
+                                        <th scope="row">{ (currentPage -1)* currentLimit + index + 1}</th>
                                         <th scope="row">{item.id}</th>
                                         <th scope="row">{item.email}</th>
                                         <th scope="row">{item.phone}</th>
                                         <th scope="row">{item.Group ? item.Group.name : ''}</th>
                                         <th scope="row">
                                             <button
-                                                
+
                                                 className="btn btn-warning">Edit</button>
                                             <button
                                                 // onClick={handleShow}

@@ -8,6 +8,7 @@ import _ from 'lodash';
 
 const ModalAddUser = (props) => {
     const [groups, setGroups] = useState([])
+    // const [valueInputs, setValueInputs] = useState(validInputDefault)
     useEffect(() => {
         getAllGroup();
     }, [])
@@ -23,7 +24,7 @@ const ModalAddUser = (props) => {
         groupId: ''
     }
     const validInputDefault = {
-        validEmail: true,
+    email: true,
         validPhone: true,
         validUsername: true,
         validAddress: true,
@@ -69,7 +70,15 @@ const getAllGroup = async () => {
 }
     const handleSaveUser = async() => {
         let response = await fetchCreateUser(userData);
-
+        if (response.data && response.data.EC === 0) {
+            props.handleClose()
+        }
+        if (response.data && response.data.EC !== 0) {
+            let _validInputs = _.cloneDeep(validInputDefault)
+            _validInputs[response.data.DT] = false
+            setValidInput(_validInputs)
+            toast.error(response.data.EM);  
+}
 
 
     console.log('Response insert user >>> :',response)
@@ -78,8 +87,9 @@ const getAllGroup = async () => {
     return (
         <>
             <Modal
-                {...props}
-                show ={true}
+                
+                show={props.show}
+                onHide={props.handleClose} 
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -95,7 +105,7 @@ const getAllGroup = async () => {
                         <div className="mb-3 col-12 col-sm-6 form-group">
                             <label htmlFor="" className="form-label">Email (<span className='red'>*</span>) :</label>
                             <input type="text"
-                                className={validInput.validEmail ? "form-control" : "form-control is-invalid"}
+                                className={validInput.email ? "form-control" : "form-control is-invalid"}
                                 name='email'
                             value={userData.email}
                                 onChange={(event) => handleOnChangeInput(event.target.value,'email')}
@@ -117,7 +127,7 @@ const getAllGroup = async () => {
                             <label htmlFor="" className="form-label">UserName (<span className='red'>*</span>) :</label>
                             <input type="text"
                                 className={validInput.validUsername ? "form-control" : "form-control is-invalid"}
-                                name='username'
+                                name='name'
                                 value={userData.name}
                                 onChange={(event) => handleOnChangeInput(event.target.value, 'name')}
                             />
@@ -146,14 +156,17 @@ const getAllGroup = async () => {
                             <label htmlFor="" className="form-label">Gender : </label>
                         <div className='group-control'>
                             <div className="form-check form-check-inline ms-2">
-                                    <input className="form-check-input" type="radio" name="gender" id="inlineRadio1" 
-                                        value={userData.gender}
+                                    <input className="form-check-input" type="radio" name="gender" id="inlineRadio1" value= "male"
+                                        checked={userData.gender ==='male'}
                                         onChange={(event) => handleOnChangeInput(event.target.value, 'gender')}
                                     />
                                     <label className="form-check-label" htmlFor="inlineRadio1">Nam</label>
                             </div>
                             <div className="form-check form-check-inline">
-                                <input  className="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" />
+                                    <input className="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female"
+                                        checked={userData.gender === 'female'}
+                                        onChange={(event) => handleOnChangeInput(event.target.value, 'gender')}
+                                    />
                                     <label className="form-check-label" htmlFor="inlineRadio2">Nu</label>
                             </div>
                             </div>
@@ -177,7 +190,7 @@ const getAllGroup = async () => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary"  onClick={props.onHide}>Close</Button>
+                    <Button variant="secondary" onClick={props.handleClose}>Close</Button>
                     <Button variant="primary" onClick={handleSaveUser}>Save</Button>
                 </Modal.Footer>
             </Modal>
