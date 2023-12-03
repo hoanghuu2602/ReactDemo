@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ReactPaginate from 'react-paginate';
 import { toast } from "react-toastify";
 
 import { fetchListUser, fetchDeleteUser } from "../../../services/userService";
 import ModalDelete from '../../Modal/ModalDelete'
 import ModalAddUser from "../../Modal/ModalAddUser";
-import { sassTrue } from "sass";
-
+import { UserContext } from "../../../context/UserContext";
 
 function User() {
     const [listUser, setListUser] = useState([])
@@ -19,8 +18,8 @@ function User() {
 
     useEffect(() => {
         fetchUser();
-
     }, [currentPage]);
+
     const fetchUser = async () => {
         let reponsite = await fetchListUser(currentPage, currentLimit)
         if (reponsite && reponsite.data.EC === 0) {
@@ -60,8 +59,6 @@ function User() {
 
     const handleAction = async () => {
         let reponse = await fetchDeleteUser(dataModal)
-        console.log('Delete >>>', reponse)
-        // alert(user.id)
         if (reponse && reponse.data.EC === 0) {
             toast.success(reponse.data.EM)
             setIsShowDelete(false)

@@ -14,7 +14,7 @@ function Menu({ children, items = [] }) {
     const [history, setHistory] =useState([{data:items}])
     const curent = history[history.length - 1] // Lay phan tu cuoi cua mang
     
-    console.log('history',history)
+    // console.log('history',history)
 
     const renderItem = () => {
         

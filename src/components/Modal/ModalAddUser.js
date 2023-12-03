@@ -53,7 +53,7 @@ const getAllGroup = async () => {
         
         
         if (reponsite && reponsite.data.EC === 0) {
-            console.log('group data ', reponsite.data.DT)
+            // console.log('group data ', reponsite.data.DT)
             setGroups(reponsite.data.DT)
             if (reponsite && reponsite.data.DT.length > 0) {
                 let groupId = reponsite.data.DT[0].id
